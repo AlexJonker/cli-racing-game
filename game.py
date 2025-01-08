@@ -26,7 +26,7 @@ def ask(options):
     for i, option in enumerate(options, start=1):
         print(f"{i}. {option}")
     answer = input("Please enter the number of your choice: ")
-    if int(answer) in range(1, len(options) + 1):
+    if (answer != "") and (int(answer) in range(1, len(options) + 1)):
         return int(answer)
     else:
         print("Invalid choice, please try again.")
@@ -40,20 +40,9 @@ def new_player():
     print(f"Nice to meet you, {load()['name']}!")
     sleep(1)
     print("Please choose your starter car:")
-    add(
-        "car",
-        ask(
-            [
-                "1990 Mazda Miata (116 HP)",
-                "1983 Toyota AE86 (112 HP",
-                "1987 Suzuki Swift GTi (100 HP)",
-            ]
-        ),
-    )
+    add("car", ask(["1990 Mazda Miata (116 HP)", "1983 Toyota AE86 (112 HP", "1987 Suzuki Swift GTi (100 HP)",]))
     add("hp", cars[int(load()["car"])]["hp"])
-    print(
-        f"You chose the {cars[int(load()['car'])]['year']} {cars[int(load()['car'])]['brand']} {cars[int(load()['car'])]['name']}, Good choice!"
-    )
+    print(f"You chose the {cars[int(load()['car'])]['year']} {cars[int(load()['car'])]['brand']} {cars[int(load()['car'])]['name']}, Good choice!")
     sleep(1)
     print("Here's $3K to get started!")
     add("money", 3000)
@@ -69,7 +58,6 @@ def new_player():
 def race():
     print("You chose racing!")
 
-
 def upgrade():
     print("You chose upgrading/repairing your car!")
 
@@ -78,9 +66,7 @@ def start():
     if load() == {}:
         new_player()
     else:
-        print(
-            f"Welcome back! Your current car is the {cars[int(load()['car'])]['year']} {cars[int(load()['car'])]['brand']} {cars[int(load()['car'])]['name']} and you are pushing {cars[int(load()['car'])]['hp']} HP."
-        )
+        print(f"Welcome back! Your current car is the {cars[int(load()['car'])]['year']} {cars[int(load()['car'])]['brand']} {cars[int(load()['car'])]['name']} and you are pushing {cars[int(load()['car'])]['hp']} HP.")
 
     print("What do you want to do?")
     choice = ask(["Race", "Upgrade/repair your car", "Exit"])

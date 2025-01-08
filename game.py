@@ -36,11 +36,21 @@ def add(name, value):
 
 
 def new_player():
+    print("Welcome! Looks like this is your first time playing.")
+    print("What's your name?")
+    add("name", input("Name: "))
+    sleep(1)
+    print(f"Nice to meet you, {load()['name']}!")
+    sleep(1)
     print("Please choose your starter car:")
     print("1. 1990 Mazda Miata (116 HP)")
     print("2. 1983 Toyota AE86 (112 HP)")
     print("3. 1987 Suzuki Swift GTi (100 HP)")
     add("car", input("1, 2 or 3: "))
+    add("hp", cars[int(load()['car'])]['hp'])
+    print(f"You chose the {cars[int(load()['car'])]['year']} {cars[int(load()['car'])]['brand']} {cars[int(load()['car'])]['name']}, Good choice!")
+    sleep(1)
+    print("Have fun playing!")
 
 if load() == {}:
     new_player()

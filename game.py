@@ -1,6 +1,7 @@
 import json
 import os
 from time import *
+import curses
 
 cars = {
     1: {
@@ -34,6 +35,16 @@ def add(name, value):
     table[name] = value
     json.dump(table, open('./data.json', 'w'))
 
+def ask(options):
+    for i, option in enumerate(options, start=1):
+        print(f"{i}. {option}")
+    answer = input("Please enter the number of your choice: ")
+    if int(answer) in range(1, len(options) + 1):
+        return int(answer)
+    else:
+        print("Invalid choice, please try again.")
+        ask(options)
+
 
 def new_player():
     print("Welcome! Looks like this is your first time playing.")
@@ -43,10 +54,7 @@ def new_player():
     print(f"Nice to meet you, {load()['name']}!")
     sleep(1)
     print("Please choose your starter car:")
-    print("1. 1990 Mazda Miata (116 HP)")
-    print("2. 1983 Toyota AE86 (112 HP)")
-    print("3. 1987 Suzuki Swift GTi (100 HP)")
-    add("car", input("1, 2 or 3: "))
+    add("car", ask(["1990 Mazda Miata (116 HP)", "1983 Toyota AE86 (112 HP", "1987 Suzuki Swift GTi (100 HP)"]))
     add("hp", cars[int(load()['car'])]['hp'])
     print(f"You chose the {cars[int(load()['car'])]['year']} {cars[int(load()['car'])]['brand']} {cars[int(load()['car'])]['name']}, Good choice!")
     sleep(1)
@@ -72,15 +80,12 @@ def upgrade():
 
 def start():
     print("What do you want to do?")
-    print("1. Race")
-    print("2. Upgrade/repair your car")
-    print("3. Exit")
-    choice = input("1 or 2: ")
-    if choice == "1":
+    choice = ask(["Race", "Upgrade/repair your car", "Exit"])
+    if choice == 1:
         race()
-    elif choice == "2":
+    elif choice == 2:
         upgrade()
-    elif choice == "3":
+    elif choice == 3:
         print("Goodbye!")
         exit()
 

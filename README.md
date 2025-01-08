@@ -1,4 +1,4 @@
-Een python cli game.
+Een cli racing game gemaakt in python.
 
 **Hoe kan je spelen?**
 

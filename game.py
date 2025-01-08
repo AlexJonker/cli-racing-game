@@ -26,7 +26,7 @@ def ask(options):
     for i, option in enumerate(options, start=1):
         print(f"{i}. {option}")
     answer = input("Please enter the number of your choice: ")
-    if (answer != "") and (int(answer) in range(1, len(options) + 1)):
+    if (answer.isnumeric()) and (int(answer) in range(1, len(options) + 1)):
         return int(answer)
     else:
         print("Invalid choice, please try again.")
@@ -57,16 +57,18 @@ def new_player():
 
 def race():
     print("You chose racing!")
+    return
 
 def upgrade():
     print("You chose upgrading/repairing your car!")
+    return
 
 
 def start():
     if load() == {}:
         new_player()
     else:
-        print(f"Welcome back! Your current car is the {cars[int(load()['car'])]['year']} {cars[int(load()['car'])]['brand']} {cars[int(load()['car'])]['name']} and you are pushing {cars[int(load()['car'])]['hp']} HP.")
+        print(f"Welcome back! Your current car is the {cars[int(load()['car'])]['year']} {cars[int(load()['car'])]['brand']} {cars[int(load()['car'])]['name']} and you are pushing {load()["hp"]} HP.")
 
     print("What do you want to do?")
     choice = ask(["Race", "Upgrade/repair your car", "Exit"])
@@ -77,6 +79,8 @@ def start():
     elif choice == 3:
         print("Goodbye!")
         exit()
+
+    start()
 
 
 start()

@@ -62,17 +62,21 @@ else:
 def race():
     print("You chose racing!")
 def upgrade():
-    print("You chose upgrading/reparing your car!")
+    print("You chose upgrading/repairing your car!")
 
 
 def start():
     print("What do you want to do?")
     print("1. Race")
     print("2. Upgrade/repair your car")
+    print("3. Exit")
     choice = input("1 or 2: ")
     if choice == "1":
         race()
     elif choice == "2":
         upgrade()
+    elif choice == "3":
+        print("Goodbye!")
+        exit()
 
 start()

@@ -56,3 +56,13 @@ if load() == {}:
     new_player()
 else:
     print(f"Welcome back! Your current car is the {cars[int(load()['car'])]['year']} {cars[int(load()['car'])]['brand']} {cars[int(load()['car'])]['name']} and you are pushing {cars[int(load()['car'])]['hp']} HP.")
+
+#################################
+
+def start():
+    print("What do you want to do?")
+    print("1. Race")
+    print("2. Upgrade/repair your car")
+    input("1 or 2: ")
+
+start()

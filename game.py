@@ -50,7 +50,12 @@ def new_player():
     add("hp", cars[int(load()['car'])]['hp'])
     print(f"You chose the {cars[int(load()['car'])]['year']} {cars[int(load()['car'])]['brand']} {cars[int(load()['car'])]['name']}, Good choice!")
     sleep(1)
+    print("Here's $3K to get started!")
+    add("money", 3000)
     print("Have fun playing!")
+    # adding some default values to the data.json file
+    add("level", 1)
+    add("xp", 0)
 
 if load() == {}:
     new_player()

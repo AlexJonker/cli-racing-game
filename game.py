@@ -1,6 +1,10 @@
 import json
 import os
 from time import *
+import curses
+stdscr = curses.initscr()
+stdscr.clear()
+stdscr.refresh()
 
 cars = {
     1: {"name": "Miata", "brand": "Mazda", "year": 1990, "hp": 116},

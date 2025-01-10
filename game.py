@@ -19,6 +19,16 @@ cars = {
 
 
 try:
+    def clear():
+        stdscr.clear()
+        stdscr.refresh()
+
+    def display(text):
+        height, width = stdscr.getmaxyx()
+        y, _ = stdscr.getyx()
+        x = (width // 2) - (len(text) // 2)
+        stdscr.addstr(y, x, f"{text} \n")
+        stdscr.refresh()
     def load():
         if not os.path.exists("./data.json"):
             json.dump({}, open("./data.json", "w"))

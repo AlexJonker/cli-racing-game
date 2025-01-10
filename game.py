@@ -32,9 +32,6 @@ try:
         else:
             print("Invalid choice, please try again.")
             return ask(options)
-        print("")
-        print("Goodbye!")
-        exit()
 
 
     def new_player():

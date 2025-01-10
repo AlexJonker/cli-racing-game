@@ -6,6 +6,11 @@ stdscr = curses.initscr()
 stdscr.clear()
 stdscr.refresh()
 
+curses.start_color()
+curses.init_pair(1, 1, 233) # selectie en achtergrond kleuren
+stdscr.bkgd(curses.color_pair(1))
+curses.curs_set(0) # balkje wanneer je typt weg
+
 cars = {
     1: {"name": "Miata", "brand": "Mazda", "year": 1990, "hp": 116},
     2: {"name": "AE86", "brand": "Toyota", "year": 1983, "hp": 112},

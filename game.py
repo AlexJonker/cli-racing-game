@@ -79,6 +79,7 @@ try:
 
 
     def new_player():
+        clear()
         display("Welcome! Looks like this is your first time playing.")
 
         curses.curs_set(1)
@@ -134,12 +135,22 @@ try:
         else:
             display(f"Welcome back! Your current car is the {cars[int(load()['car'])]['year']} {cars[int(load()['car'])]['brand']} {cars[int(load()['car'])]['name']} and you are pushing {load()["hp"]} HP.")
             display(f"You are currently at level {load()['level']} with {load()['xp']} XP.")
-        choice = ask("What do you want to do?", ["Race", "Upgrade/repair your car", "Exit"])
+        choice = ask("What do you want to do?", ["Race", "Upgrade/repair your car","Danger zone" , "Exit"])
         if choice == 1:
             race()
         elif choice == 2:
             upgrade()
         elif choice == 3:
+            choice = ask("Welcome to the danger zone! What do you want to do?", ["Clear all data"])
+            if choice == 1:
+                choice = ask("Are you sure you want to remove all data?", ["Yes", "No"])
+                if choice == 1:
+                    os.remove("./data.json")
+                    clear()
+                    display("All data has been removed!")
+                    sleep(2)
+                    start()
+        elif choice == 4:
             clear()
             display("Goodbye!")
             exit()

@@ -7,7 +7,7 @@ stdscr.clear()
 stdscr.refresh()
 
 curses.start_color()
-curses.init_pair(1, 1, 233) # selectie en achtergrond kleuren
+curses.init_pair(1, 1, 233) # selectie en achtergrondkleuren
 stdscr.bkgd(curses.color_pair(1))
 curses.curs_set(0) # hide the little type indicator
 cars = {
@@ -44,13 +44,13 @@ try:
 
 
     def ask(text, options):
-        def main(stdscr):
+        def main(curs):
             current_selection = 0
             count = len(options)
 
             while True:
                 clear()
-                height, width = stdscr.getmaxyx()
+                height, width = curs.getmaxyx()
 
                 display(text)
 
@@ -58,13 +58,13 @@ try:
                     y = 2 + num
                     x = (width // 2) - (len(option) // 2)
                     if num == current_selection:
-                        stdscr.addstr(y, x, f"> {option}", curses.A_REVERSE)
+                        curs.addstr(y, x, f"> {option}", curses.A_REVERSE)
                     else:
-                        stdscr.addstr(y, x, f"  {option}")
+                        curs.addstr(y, x, f"  {option}")
 
-                stdscr.refresh()
+                curs.refresh()
 
-                key = stdscr.getch()
+                key = curs.getch()
                 if key == curses.KEY_UP:
                     current_selection = (current_selection - 1) % count
                 elif key == curses.KEY_DOWN:
@@ -153,6 +153,7 @@ try:
         elif choice == 4:
             clear()
             display("Goodbye!")
+            curses.curs_set(1)
             exit()
 
         start()
@@ -160,4 +161,5 @@ try:
 
     start()
 except KeyboardInterrupt:
+    curses.curs_set(1)
     exit()

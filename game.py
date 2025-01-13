@@ -98,18 +98,20 @@ try:
         curses.noecho()
         curses.curs_set(0)
 
-        add("name", player_name)
-        display(f"Nice to meet you, {load()['name']}!")
+        display(f"Nice to meet you, {player_name}!")
         sleep(1)
-        add("car", ask("Please choose your starter car:", ["1990 Mazda Miata (116 HP)", "1983 Toyota AE86 (112 HP", "1987 Suzuki Swift GTi (100 HP)",]))
-        add("hp", cars[int(load()["car"])]["hp"])
+        car = ask("Please choose your starter car:", ["1990 Mazda Miata (116 HP)", "1983 Toyota AE86 (112 HP", "1987 Suzuki Swift GTi (100 HP)",])
         clear()
-        display(f"You chose the {cars[int(load()['car'])]['year']} {cars[int(load()['car'])]['brand']} {cars[int(load()['car'])]['name']}, Good choice!")
+        display(f"You chose the {cars[car]["year"]} {cars[car]["brand"]} {cars[car]["name"]}, Good choice!")
         sleep(1)
         display("Here's $3K to get started!")
-        add("money", 3000)
         display("Have fun playing!")
-        # adding some default values to the data.json file
+        # add the data to data.json
+
+        add("name", player_name)
+        add("car", car)
+        add("hp", cars[int(load()["car"])]["hp"])
+        add("money", 3000)
         add("level", 1)
         add("xp", 0)
         sleep(2)
@@ -162,4 +164,6 @@ try:
     start()
 except KeyboardInterrupt:
     curses.curs_set(1)
+
+
     exit()

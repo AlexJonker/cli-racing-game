@@ -9,3 +9,6 @@ Een cli racing game gemaakt in python.
 
 ``python3 game.py``
 
+**of in 1 command:**
+````
+git clone git@github.com:tallandcollege/project-2-command-line-game-MeneerAlex.git ./CLIRacer && cd CLIRacer && python3 game.py

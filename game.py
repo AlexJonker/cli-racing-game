@@ -137,7 +137,19 @@ try:
     def start():
         if load() == {}:
             new_player()
-        choice = ask([f"Welcome back! Your current car is the {cars[int(load()['car'])]['year']} {cars[int(load()['car'])]['brand']} {cars[int(load()['car'])]['name']} and you are pushing {load()["hp"]} HP.", f"You are currently at level {load()['level']} with {load()['xp']} XP.", "What do you want to do?"], ["Race", "Upgrade/repair your car","Danger zone" , "Exit"])
+        choice = ask(
+            [ # text
+                f"Welcome back! Your current car is the {cars[int(load()['car'])]['year']} {cars[int(load()['car'])]['brand']} {cars[int(load()['car'])]['name']} and you are pushing {load()["hp"]} HP.",
+                f"You are currently at level {load()['level']} with {load()['xp']} XP.",
+                "What do you want to do?"
+            ],
+            [ # options
+                "Race",
+                "Upgrade/repair your car",
+                "Danger zone",
+                "Exit"
+            ]
+        )
         if choice == 1:
             race()
         elif choice == 2:
@@ -153,8 +165,6 @@ try:
                     sleep(2)
                     start()
         elif choice == 4:
-            clear()
-            display("Goodbye!")
             curses.curs_set(1)
             exit()
 

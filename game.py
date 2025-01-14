@@ -43,7 +43,7 @@ try:
 
 
 
-    def ask(text, options):
+    def ask(textarr, options):
         def main(curs):
             current_selection = 0
             count = len(options)
@@ -52,10 +52,13 @@ try:
                 clear()
                 height, width = curs.getmaxyx()
 
-                display(text)
+                for text in textarr:
+                    display(text)
+                display("--------------------")
+                # display(text)
 
                 for num, option in enumerate(options):
-                    y = 2 + num
+                    y = num + len(textarr) + 1
                     x = (width // 2) - (len(option) // 2)
                     if num == current_selection:
                         curs.addstr(y, x, f"> {option}", curses.A_REVERSE)
@@ -100,7 +103,7 @@ try:
 
         display(f"Nice to meet you, {player_name}!")
         sleep(1)
-        car = ask("Please choose your starter car:", ["1990 Mazda Miata (116 HP)", "1983 Toyota AE86 (112 HP", "1987 Suzuki Swift GTi (100 HP)",])
+        car = ask(["Please choose your starter car:"], ["1990 Mazda Miata (116 HP)", "1983 Toyota AE86 (112 HP", "1987 Suzuki Swift GTi (100 HP)",])
         clear()
         display(f"You chose the {cars[car]["year"]} {cars[car]["brand"]} {cars[car]["name"]}, Good choice!")
         sleep(1)
@@ -134,18 +137,15 @@ try:
     def start():
         if load() == {}:
             new_player()
-        else:
-            display(f"Welcome back! Your current car is the {cars[int(load()['car'])]['year']} {cars[int(load()['car'])]['brand']} {cars[int(load()['car'])]['name']} and you are pushing {load()["hp"]} HP.")
-            display(f"You are currently at level {load()['level']} with {load()['xp']} XP.")
-        choice = ask("What do you want to do?", ["Race", "Upgrade/repair your car","Danger zone" , "Exit"])
+        choice = ask([f"Welcome back! Your current car is the {cars[int(load()['car'])]['year']} {cars[int(load()['car'])]['brand']} {cars[int(load()['car'])]['name']} and you are pushing {load()["hp"]} HP.", f"You are currently at level {load()['level']} with {load()['xp']} XP.", "What do you want to do?"], ["Race", "Upgrade/repair your car","Danger zone" , "Exit"])
         if choice == 1:
             race()
         elif choice == 2:
             upgrade()
         elif choice == 3:
-            choice = ask("Welcome to the danger zone! What do you want to do?", ["Clear all data"])
+            choice = ask(["Welcome to the danger zone! What do you want to do?"], ["Clear all data"])
             if choice == 1:
-                choice = ask("Are you sure you want to remove all data?", ["Yes", "No"])
+                choice = ask(["Are you sure you want to remove all data?"], ["Yes", "No"])
                 if choice == 1:
                     os.remove("./data.json")
                     clear()
@@ -164,6 +164,4 @@ try:
     start()
 except KeyboardInterrupt:
     curses.curs_set(1)
-
-
     exit()

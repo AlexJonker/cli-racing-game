@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Miata",
+    "brand": "Mazda",
+    "year": 1990,
+    "hp": 116
+  },
+  {
+    "name": "AE86",
+    "brand": "Toyota",
+    "year": 1983,
+    "hp": 112
+  },
+  {
+    "name": "Swift GTi",
+    "brand": "Suzuki",
+    "year": 1987,
+    "hp": 100
+  },
+  {
+    "name": "Golf",
+    "brand": "Volkswagen",
+    "year": 1990,
+    "hp": 100
+  }
+]

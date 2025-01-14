@@ -143,7 +143,7 @@ try:
         elif choice == 2:
             upgrade()
         elif choice == 3:
-            choice = ask(["Welcome to the danger zone! What do you want to do?"], ["Clear all data"])
+            choice = ask(["Welcome to the danger zone! What do you want to do?"], ["Clear all data", "Back"])
             if choice == 1:
                 choice = ask(["Are you sure you want to remove all data?"], ["Yes", "No"])
                 if choice == 1:

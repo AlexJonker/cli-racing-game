@@ -3,12 +3,11 @@ Een cli racing game gemaakt in python.
 **Hoe kan je spelen?**
 
 
-``git clone git@github.com:tallandcollege/project-2-command-line-game-MeneerAlex.git ./CLIRacer``
-
-``cd CLIRacer``
-
-``python3 game.py``
-
-**of in 1 command:**
-````
+Linux:
+```
 git clone git@github.com:tallandcollege/project-2-command-line-game-MeneerAlex.git ./CLIRacer && cd CLIRacer && python3 game.py
+```
+Windows:
+```
+pip install windows-curses && git clone git@github.com:tallandcollege/project-2-command-line-game-MeneerAlex.git ./CLIRacer && cd CLIRacer && py game.py
+```

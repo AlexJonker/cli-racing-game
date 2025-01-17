@@ -24,12 +24,12 @@ def current_car(item):
     return data["cars"][car_name][item]
 
 
-def tune(new_tune_level):
+def car(thing, new_level):
     data = load()  # Load the current data
     cars = json.load(open("./cars.json", "r"))
     selected = data['selected_car']
     car_name = cars[selected]['name']
-    data["cars"][car_name]["tune"] = new_tune_level
+    data["cars"][car_name][thing] = new_level
     json.dump(data, open("./data.json", "w"), indent=2)
 
 
@@ -70,7 +70,7 @@ def new_player(stdscr):
     # add the data to data.json
 
     add("name", player_name)
-    add("cars", {cars[car]["name"]: {"tune": 0}})
+    add("cars", {cars[car]["name"]: {"tune": 0, "damage": 0}})
     add("selected_car", car)
     add("money", 200)
     add("level", 1)

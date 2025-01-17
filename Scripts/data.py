@@ -40,7 +40,12 @@ def new_player(stdscr):
 
     display.output(f"Nice to meet you, {player_name}!")
     sleep(1)
-    car = display.ask(["Please choose your starter car:"], [f"{car['year']} {car['brand']} {car['name']} ({car['hp']} HP)" for car in cars])
+    starter_cars = [car for car in cars if car.get('starter')]
+    car = display.ask(
+        ["Please choose your starter car:"],
+        [f"{car['year']} {car['brand']} {car['name']} ({car['hp']} HP)" for car in starter_cars]
+    )
+
     display.clear()
     display.output(f"You chose the {cars[car]["year"]} {cars[car]["brand"]} {cars[car]["name"]}, Good choice!")
     sleep(1)

@@ -16,6 +16,22 @@ def add(name, value):
     json.dump(table, open("./data.json", "w"), indent=2)
 
 
+def current_car(item):
+    cars = json.load(open("./cars.json", "r"))
+    data = load()
+    selected = data['selected_car']
+    car_name = cars[selected]['name']
+    return data["cars"][car_name][item]
+
+
+def tune(new_tune_level):
+    data = load()  # Load the current data
+    cars = json.load(open("./cars.json", "r"))
+    selected = data['selected_car']
+    car_name = cars[selected]['name']
+    data["cars"][car_name]["tune"] = new_tune_level
+    json.dump(data, open("./data.json", "w"), indent=2)
+
 
 def new_player(stdscr):
     cars = json.load(open("./cars.json", "r"))

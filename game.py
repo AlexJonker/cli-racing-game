@@ -26,8 +26,18 @@ try:
     def garage():
         choice = display.ask(["Welcome to the garage!", "What do you want to do?"], ["Tune car", "Buy new car", "Repair", "Back"])
         if choice == 0:
-            display.clear()
-            display.output("W.I.P.")
+            tune = data.current_car("tune")
+            price = 100 + (tune * 50)
+            choice = display.ask([f"Current tune level is: {tune}", f"Do you want to upgrade for ${price}?"], ["Yes", "No"])
+            if choice == 0:
+                money = data.load()["money"]
+                if money >= price:
+                    data.add("money", money -price)
+                    data.tune(tune + 1)
+                else:
+                    display.clear()
+                    display.output("Broke boi")
+                    sleep(1)
             sleep(1)
         elif choice == 1:
             display.clear()

@@ -24,12 +24,16 @@ try:
         return
 
     def garage():
-        choice = display.ask(["Welcome to the garage!", "What do you want to do?"], ["Tune car", "Buy new car", "Back"])
+        choice = display.ask(["Welcome to the garage!", "What do you want to do?"], ["Tune car", "Buy new car", "Repair", "Back"])
         if choice == 0:
             display.clear()
             display.output("W.I.P.")
             sleep(1)
         elif choice == 1:
+            display.clear()
+            display.output("W.I.P.")
+            sleep(1)
+        elif choice == 2:
             display.clear()
             display.output("W.I.P.")
             sleep(1)

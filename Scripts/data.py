@@ -49,14 +49,14 @@ def new_player(stdscr):
     display.clear()
     display.output(f"You chose the {cars[car]["year"]} {cars[car]["brand"]} {cars[car]["name"]}, Good choice!")
     sleep(1)
-    display.output("Here's $3K to get started!")
+    display.output("Here's $200 to get started!")
     display.output("Have fun playing!")
     # add the data to data.json
 
     add("name", player_name)
-    add("cars", {cars[car]["name"]: {"tunes": []}})
+    add("cars", {cars[car]["name"]: {"tune": 0}})
     add("selected_car", car)
-    add("money", 3000)
+    add("money", 200)
     add("level", 1)
     add("xp", 0)
     sleep(2)

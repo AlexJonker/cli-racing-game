@@ -3,24 +3,40 @@
     "name": "Miata",
     "brand": "Mazda",
     "year": 1990,
-    "hp": 116
+    "hp": 116,
+    "starter": true,
+    "price": 5000
   },
   {
     "name": "AE86",
     "brand": "Toyota",
     "year": 1983,
-    "hp": 112
+    "hp": 112,
+    "starter": true,
+    "price": 10000
   },
   {
     "name": "Swift GTi",
     "brand": "Suzuki",
     "year": 1987,
-    "hp": 100
+    "hp": 100,
+    "starter": true,
+    "price": 8000
   },
   {
     "name": "Golf",
     "brand": "Volkswagen",
     "year": 1990,
-    "hp": 100
+    "hp": 100,
+    "starter": false,
+    "price": 6000
+  },
+  {
+    "name": "CRX",
+    "brand": "Honda",
+    "year": 1984,
+    "hp": 108,
+    "starter": false,
+    "price": 9000
   }
 ]

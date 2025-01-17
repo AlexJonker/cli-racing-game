@@ -35,7 +35,7 @@ try:
             data.new_player(stdscr)
         choice = display.ask(
             [ # text
-                f"Welcome back! Your current car is the {cars[data.load()['car']]['year']} {cars[data.load()['car']]['brand']} {cars[data.load()['car']]['name']} and you are pushing {data.load()["hp"]} HP.",
+                f"Welcome back! Your current selected car is the {cars[data.load()['selected_car']]['year']} {cars[data.load()['selected_car']]['brand']} {cars[data.load()['selected_car']]['name']}.",
                 f"You are currently at level {data.load()['level']} with {data.load()['xp']} XP.",
                 "What do you want to do?"
             ],

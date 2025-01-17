@@ -54,8 +54,8 @@ def new_player(stdscr):
     # add the data to data.json
 
     add("name", player_name)
-    add("car", car)
-    add("hp", cars[load()["car"]]["hp"])
+    add("cars", {cars[car]["name"]: {"tunes": []}})
+    add("selected_car", car)
     add("money", 3000)
     add("level", 1)
     add("xp", 0)

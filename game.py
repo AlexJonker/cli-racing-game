@@ -23,10 +23,16 @@ try:
 
         return
 
-    def upgrade():
-        display.clear()
-        display.output("W.I.P.")
-        sleep(1)
+    def garage():
+        choice = display.ask(["Welcome to the garage!", "What do you want to do?"], ["Tune car", "Buy new car", "Back"])
+        if choice == 0:
+            display.clear()
+            display.output("W.I.P.")
+            sleep(1)
+        elif choice == 1:
+            display.clear()
+            display.output("W.I.P.")
+            sleep(1)
         return
 
 
@@ -41,7 +47,7 @@ try:
             ],
             [ # options
                 "Race",
-                "Upgrade/repair your car",
+                "garage",
                 "Danger zone",
                 "Exit"
             ]
@@ -49,7 +55,7 @@ try:
         if choice == 0:
             race()
         elif choice == 1:
-            upgrade()
+            garage()
         elif choice == 2:
             choice = display.ask(["Welcome to the danger zone! What do you want to do?"], ["Clear all data", "Back"])
             if choice == 0:

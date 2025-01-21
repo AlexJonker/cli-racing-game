@@ -1,4 +1,8 @@
 import curses
+import Scripts.data as data
+import json
+
+cars = json.load(open("./cars.json", "r"))
 
 
 def init_curs():
@@ -13,9 +17,45 @@ def init_curs():
 stdscr = init_curs()
 
 
+def data_menu():
+    if data.load() != {}:
+        selected_car_name = f"{cars[data.load()['selected_car']]['year']} {cars[data.load()['selected_car']]['brand']} {cars[data.load()['selected_car']]['name']}"
+
+        car_names = []
+        for car in data.load()["cars"]:
+            car_names.append(f"- {car}")
+
+        menu_width = 35
+        menu_data = [
+            f"Money: ${data.load()["money"]}",
+            f"Level: {data.load()["level"]}",
+            f"XP: {data.load()["xp"]}",
+            "",
+            "-" * menu_width ,
+            "",
+            f"Selected car: {selected_car_name}",
+            f"Tune: {data.current_car("tune")}",
+            f"Damage: {data.current_car("damage")}/100",
+            "",
+            "-" * menu_width ,
+            "",
+            f"Cars: {"\n       ".join(car_names)}",
+        ]
+        menu_height = len(menu_data) + len(car_names) + 1
+        menu_win = curses.newwin(menu_height, menu_width, 0, 0)
+        num = 0
+        for item in menu_data:
+            menu_win.addstr(num + 1, 1, f"{item}")
+            num += 1
+        menu_win.bkgd(curses.color_pair(1))
+        menu_win.border()
+        menu_win.refresh()
+
+
 def clear():
-    stdscr.clear()
+    stdscr.erase()
     stdscr.refresh()
+    data_menu() # het menu met speler data
 
 def output(text):
     height, width = stdscr.getmaxyx()

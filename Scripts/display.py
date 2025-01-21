@@ -39,9 +39,9 @@ def data_menu():
             "",
             "-" * menu_width ,
             "",
-            f"Cars: {"\n       ".join(car_names)}",
+            f"Owned cars:\n {"\n ".join(car_names)}",
         ]
-        menu_height = len(menu_data) + len(car_names) + 1
+        menu_height = len(menu_data) + len(car_names) + 2
         menu_win = curses.newwin(menu_height, menu_width, 0, 0)
         num = 0
         for item in menu_data:

@@ -4,6 +4,9 @@ import json
 import Scripts.data as data
 import Scripts.display as display
 
+cars = json.load(open("./cars.json", "r"))
+
+
 def race():
     playerdata = data.load()
     cars = json.load(open("./cars.json", "r"))
@@ -74,7 +77,12 @@ def garage():
 
     elif choice == 2:
         display.clear()
-        display.output("W.I.P.")
-        sleep(1)
+        car_choice = display.ask(
+            ["Please choose the car you want to buy:"],
+            [f"{car['year']} {car['brand']} {car['name']} ({car['hp']} HP)" for car in cars]
+        )
+
+        data.add_car(cars[car_choice]["name"])
+    sleep(1)
 
     return

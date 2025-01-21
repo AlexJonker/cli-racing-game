@@ -4,6 +4,8 @@ import json
 
 import Scripts.display as display
 
+cars = json.load(open("./cars.json", "r"))
+
 
 def load():
     if not os.path.exists("./data.json"):
@@ -21,7 +23,6 @@ def add(name, value):
 
 
 def current_car(item):
-    cars = json.load(open("./cars.json", "r"))
     data = load()
     selected = data['selected_car']
     car_name = cars[selected]['name']
@@ -31,16 +32,20 @@ def current_car(item):
 
 def modify(thing, new_level):
     data = load()  # Load the current data
-    cars = json.load(open("./cars.json", "r"))
     selected = data['selected_car']
     car_name = cars[selected]['name']
     data["cars"][car_name][thing] = new_level
     json.dump(data, open("./data.json", "w"), indent=2)
 
 
+def add_car(name):
+    data = load()
+    data["cars"][name] = {"tune": 0, "damage": 0}
+    json.dump(data, open("./data.json", "w"), indent=2)
+
+
 def new_player():
     stdscr = display.init_curs()
-    cars = json.load(open("./cars.json", "r"))
     display.clear()
     display.output("Welcome! Looks like this is your first time playing.")
 

@@ -15,8 +15,7 @@ def main():
             data.new_player()
         choice = display.ask(
             [ # text
-                f"Welcome back! Your current selected car is the {cars[data.load()['selected_car']]['year']} {cars[data.load()['selected_car']]['brand']} {cars[data.load()['selected_car']]['name']}.",
-                f"You are currently at level {data.load()['level']} with {data.load()['xp']} XP and you have ${data.load()["money"]}",
+                "Welcome!",
                 "What do you want to do?"
             ],
             [ # options

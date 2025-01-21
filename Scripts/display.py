@@ -33,9 +33,10 @@ def ask(text_array, options):
                 y = num + len(text_array) + 1
                 x = (width // 2) - (len(option) // 2)
                 if num == current_selection:
+                    x = x - 2
                     curs.addstr(y, x, f"> {option} <", curses.A_REVERSE)
                 else:
-                    curs.addstr(y, x, f"  {option}")
+                    curs.addstr(y, x, f"{option}")
 
             curs.refresh()
 

@@ -1,27 +1,18 @@
-from time import *
+import os
+import json
+from time import sleep
+
 import Scripts.data as data
 import Scripts.display as display
 import Scripts.car as car
-import os
-import json
-stdscr = display.curses.initscr()
-
-display.curses.start_color()
-display.curses.init_pair(1, 1, 233) # selectie en achtergrondkleuren
-stdscr.bkgd(display.curses.color_pair(1))
-display.curses.curs_set(0) # hide the little type indicator
-
 
 cars = json.load(open("./cars.json", "r"))
 
 
-try:
-
-
-
-    def main():
+def main():
+    try:
         if data.load() == {}:
-            data.new_player(stdscr)
+            data.new_player()
         choice = display.ask(
             [ # text
                 f"Welcome back! Your current selected car is the {cars[data.load()['selected_car']]['year']} {cars[data.load()['selected_car']]['brand']} {cars[data.load()['selected_car']]['name']}.",
@@ -35,28 +26,38 @@ try:
                 "Exit"
             ]
         )
+
         if choice == 0:
             car.race()
+            display.output("Woosh!")
+
         elif choice == 1:
             car.garage()
+
         elif choice == 2:
             choice = display.ask(["Welcome to the danger zone! What do you want to do?"], ["Clear all data", "Back"])
+
             if choice == 0:
                 choice = display.ask(["Are you sure you want to remove all data?"], ["Yes", "No"])
+
                 if choice == 0:
                     os.remove("data.json")
                     display.clear()
                     display.output("All data has been removed!")
                     sleep(2)
                     main()
+
         elif choice == 3:
             display.curses.curs_set(1)
             exit()
 
-        main()
+        main() # run main opnieuw wanneer je klaar bent
+
+    except KeyboardInterrupt:
+        display.curses.curs_set(1)
+        exit()
 
 
+
+if __name__ == "__main__":
     main()
-except KeyboardInterrupt:
-    display.curses.curs_set(1)
-    exit()

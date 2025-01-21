@@ -5,9 +5,9 @@ Een cli racing game gemaakt in python.
 
 Linux:
 ```
-git clone git@github.com:tallandcollege/project-2-command-line-game-MeneerAlex.git ./CLIRacer && cd CLIRacer && python3 game.py
+git clone git@github.com:tallandcollege/project-2-command-line-game-MeneerAlex.git ./CLIRacer && cd CLIRacer && python3 main.py
 ```
 Windows:
 ```
-pip install windows-curses && git clone git@github.com:tallandcollege/project-2-command-line-game-MeneerAlex.git ./CLIRacer && cd CLIRacer && py game.py
+pip install windows-curses && git clone git@github.com:tallandcollege/project-2-command-line-game-MeneerAlex.git ./CLIRacer && cd CLIRacer && py main.py
 ```

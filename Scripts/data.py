@@ -48,20 +48,21 @@ def new_player():
     stdscr = display.init_curs()
     display.clear()
     display.output("Welcome! Looks like this is your first time playing.")
-
     display.curses.curs_set(1)
     display.curses.echo()
     height, width = stdscr.getmaxyx()
     prompt = "What's your name? "
+
+    player_name = ""
     y, _ = stdscr.getyx()
     x = (width // 2) - (len(prompt) // 2)
+    while player_name == "":
+        stdscr.addstr(y, x, prompt)
+        input_x = x + len(prompt)
+        stdscr.move(y, input_x)
+        stdscr.refresh()
+        player_name = stdscr.getstr().decode('utf-8')
 
-    stdscr.addstr(y, x, prompt)
-    input_x = x + len(prompt)
-    stdscr.move(y, input_x)
-    stdscr.refresh()
-
-    player_name = stdscr.getstr().decode('utf-8')
     display.curses.noecho()
     display.curses.curs_set(0)
 

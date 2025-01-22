@@ -27,6 +27,7 @@ def data_menu():
 
         menu_width = 35
         menu_data = [
+            f"Name : {data.load()['name']}",
             f"Money: ${data.load()["money"]}",
             f"Level: {data.load()["level"]}",
             f"XP: {data.load()["xp"]}",

@@ -3,20 +3,20 @@ import json
 from time import sleep
 
 import Scripts.data as data
-import Scripts.display as display
-import Scripts.car as car
+import Scripts.scherm as scherm
+import Scripts.auto as auto
 
-cars = json.load(open("./cars.json", "r"))
+autos = json.load(open("./autos.json", "r"))
 
 
 def main():
     try:
-        if data.load() == {}:
-            data.new_player()
-        choice = display.ask(
+        if data.laad() == {}:
+            data.nieuwe_speler()
+        keuze = scherm.vraag(
             [ # text
-                "Welcome!",
-                "What do you want to do?"
+                "Welkom!",
+                "Wat wil je doen?"
             ],
             [ # options
                 "Race",
@@ -26,34 +26,34 @@ def main():
             ]
         )
 
-        if choice == 0:
-            car.race()
-            display.output("Woosh!")
+        if keuze == 0:
+            auto.race()
+            scherm.tekst("Woosh!")
 
-        elif choice == 1:
-            car.garage()
+        elif keuze == 1:
+            auto.garage()
 
-        elif choice == 2:
-            choice = display.ask(["Welcome to the danger zone! What do you want to do?"], ["Clear all data", "Back"])
+        elif keuze == 2:
+            keuze = scherm.vraag(["Welkom in de danger zone! Wat wil je doen?"], ["Clear je data", "Terug"])
 
-            if choice == 0:
-                choice = display.ask(["Are you sure you want to remove all data?"], ["Yes", "No"])
+            if keuze == 0:
+                keuze = scherm.vraag(["Weet je zeker dat je al je data wil verwijderen?"], ["Ja", "Nee"])
 
-                if choice == 0:
+                if keuze == 0:
                     os.remove("data.json")
-                    display.clear()
-                    display.output("All data has been removed!")
+                    scherm.clear()
+                    scherm.tekst("Alle data is verwijderd!")
                     sleep(2)
                     main()
 
-        elif choice == 3:
-            display.curses.curs_set(1)
+        elif keuze == 3:
+            scherm.curses.curs_set(1)
             exit()
 
         main() # run main opnieuw wanneer je klaar bent
 
     except KeyboardInterrupt:
-        display.curses.curs_set(1)
+        scherm.curses.curs_set(1)
         exit()
 
 

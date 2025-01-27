@@ -1,0 +1,42 @@
+[
+  {
+    "naam": "Miata",
+    "merk": "Mazda",
+    "jaar": 1990,
+    "pk": 116,
+    "starter": true,
+    "prijs": 5000
+  },
+  {
+    "naam": "AE86",
+    "merk": "Toyota",
+    "jaar": 1983,
+    "pk": 112,
+    "starter": true,
+    "prijs": 10000
+  },
+  {
+    "naam": "Swift GTI",
+    "merk": "Suzuki",
+    "jaar": 1987,
+    "pk": 100,
+    "starter": true,
+    "prijs": 8000
+  },
+  {
+    "naam": "Golf",
+    "merk": "Volkswagen",
+    "jaar": 1990,
+    "pk": 100,
+    "starter": false,
+    "prijs": 6000
+  },
+  {
+    "naam": "CRX",
+    "merk": "Honda",
+    "jaar": 1984,
+    "pk": 108,
+    "starter": false,
+    "prijs": 9000
+  }
+]

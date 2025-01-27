@@ -2,12 +2,14 @@ from time import *
 import os
 import json
 
-import Scripts.display as display
+from libxml2 import shellPrintXPathError
 
-cars = json.load(open("./cars.json", "r"))
+import Scripts.scherm as scherm
+
+autos = json.load(open("./autos.json", "r"))
 
 
-def load():
+def laad():
     if not os.path.exists("./data.json"):
         json.dump({}, open("./data.json", "w"))
 
@@ -16,76 +18,77 @@ def load():
     return data
 
 
-def add(name, value):
-    table = load()
-    table[name] = value
+def toevoegen(naam, value):
+    table = laad()
+    table[naam] = value
     json.dump(table, open("./data.json", "w"), indent=2)
 
 
-def current_car(item):
-    data = load()
-    selected = data['selected_car']
-    car_name = cars[selected]['name']
+def geselecteerde_auto(item):
+    data = laad()
+    geselecteerd = data['geselecteerde_auto']
+    auto_naam = autos[geselecteerd]['naam']
 
-    return data["cars"][car_name][item]
+    return data["autos"][auto_naam][item]
 
 
-def modify(thing, new_level):
-    data = load()  # Load the current data
-    selected = data['selected_car']
-    car_name = cars[selected]['name']
-    data["cars"][car_name][thing] = new_level
+def pas_aan(ding, nieuw_level):
+    data = laad()  # Load the current data
+    geselecteerd = data['geselecteerde_auto']
+    auto_naam = autos[geselecteerd]['naam']
+    data["autos"][auto_naam][ding] = nieuw_level
     json.dump(data, open("./data.json", "w"), indent=2)
 
 
-def add_car(name):
-    data = load()
-    data["cars"][name] = {"tune": 0, "damage": 0}
+def toevoegen_auto(naam):
+    data = laad()
+    data["autos"][naam] = {"tune": 0, "damage": 0}
     json.dump(data, open("./data.json", "w"), indent=2)
 
 
-def new_player():
-    stdscr = display.init_curs()
-    display.clear()
-    display.output("Welcome! Looks like this is your first time playing.")
-    display.curses.curs_set(1)
-    display.curses.echo()
-    height, width = stdscr.getmaxyx()
-    prompt = "What's your name? "
+def nieuwe_speler():
+    stdscr = scherm.init_curs()
+    scherm.clear()
+    scherm.tekst("Welkom! Dit is je eerste keer hier.")
+    scherm.curses.curs_set(1)
+    scherm.curses.echo()
+    hoogte, breedte = stdscr.getmaxyx()
+    prompt = "Wat is jouw naam? "
 
-    player_name = ""
+    speler_naam = ""
     y, _ = stdscr.getyx()
-    x = (width // 2) - (len(prompt) // 2)
-    while player_name == "":
+    x = (breedte // 2) - (len(prompt) // 2)
+    while speler_naam == "":
         stdscr.addstr(y, x, prompt)
         input_x = x + len(prompt)
         stdscr.move(y, input_x)
         stdscr.refresh()
-        player_name = stdscr.getstr().decode('utf-8')
+        speler_naam = stdscr.getstr().decode('utf-8')
 
-    display.curses.noecho()
-    display.curses.curs_set(0)
+    scherm.curses.noecho()
+    scherm.curses.curs_set(0)
 
-    display.output(f"Nice to meet you, {player_name}!")
+    scherm.clear()
+    scherm.tekst(f"Leuk je te ontmoeten, {speler_naam}!")
     sleep(1)
-    starter_cars = [car for car in cars if car.get('starter')]
+    starter_autos = [auto for auto in autos if auto.get('starter')]
 
-    car_choice = display.ask(
-        ["Please choose your starter car:"],
-        [f"{car['year']} {car['brand']} {car['name']} ({car['hp']} HP)" for car in starter_cars]
+    auto_choice = scherm.vraag(
+        ["Kies je eerste auto.:"],
+        [f"{auto['jaar']} {auto['merk']} {auto['naam']} ({auto['pk']} PK)" for auto in starter_autos]
     )
 
-    display.clear()
-    display.output(f"You chose the {cars[car_choice]["year"]} {cars[car_choice]["brand"]} {cars[car_choice]["name"]}, Good choice!")
+    scherm.clear()
+    scherm.tekst(f"Je hebt de {autos[auto_choice]["jaar"]} {autos[auto_choice]["merk"]} {autos[auto_choice]["naam"]} gekozen, Goede keuze!")
     sleep(1)
-    display.output("Here's $200 to get started!")
-    display.output("Have fun playing!")
+    scherm.tekst("Hier is €200 om te starten!")
+    scherm.tekst("Veel plezier!")
     # add the data to data.json
 
-    add("name", player_name)
-    add("cars", {cars[car_choice]["name"]: {"tune": 0, "damage": 0}})
-    add("selected_car", car_choice)
-    add("money", 200)
-    add("level", 1)
-    add("xp", 0)
+    toevoegen("naam", speler_naam)
+    toevoegen("autos", {autos[auto_choice]["naam"]: {"tune": 0, "schade": 0}})
+    toevoegen("geselecteerde_auto", auto_choice)
+    toevoegen("geld", 200)
+    toevoegen("level", 1)
+    toevoegen("xp", 0)
     sleep(2)

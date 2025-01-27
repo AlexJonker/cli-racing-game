@@ -2,8 +2,6 @@ from time import *
 import os
 import json
 
-from libxml2 import shellPrintXPathError
-
 import Scripts.scherm as scherm
 
 autos = json.load(open("./autos.json", "r"))

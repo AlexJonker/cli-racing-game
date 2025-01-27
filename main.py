@@ -48,9 +48,14 @@ def main():
                     main()
 
         elif keuze == 3:
-            keuze = scherm.vraag(["Welkom in de auto selectie!"], [f"{selectie}" for selectie in data.laad()["autos"]])
-            data.toevoegen("geselecteerde_auto", keuze)
-            scherm.tekst(f"{autos[keuze]['naam']} is geselecteerd!")
+            auto_namen = [f"{selectie}" for selectie in data.laad()["autos"]]
+            keuze = scherm.vraag(["Welkom in de auto selectie!"], auto_namen)
+            geselecteerde_auto_naam = auto_namen[keuze]
+
+            for auto_num, vrumvrum in enumerate(autos):
+                if vrumvrum["naam"] == geselecteerde_auto_naam:
+                    data.toevoegen("geselecteerde_auto", auto_num)
+
 
         elif keuze == 4:
             scherm.curses.curs_set(1)

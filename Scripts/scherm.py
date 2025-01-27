@@ -25,7 +25,7 @@ def data_menu():
         for auto in data.laad()["autos"]:
             auto_naam.append(f"- {auto}")
 
-        menu_breedte = 35
+        menu_breedte = 45
         menu_data = [
             f"Naam : {data.laad()['naam']}",
             f"Geld: ${data.laad()["geld"]}",

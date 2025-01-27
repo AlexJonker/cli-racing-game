@@ -56,7 +56,7 @@ def garage():
 
         if schade == 0:
             scherm.clear()
-            scherm.tekst("Geen scahde!")
+            scherm.tekst("Geen schade!")
             sleep(2)
 
         else:

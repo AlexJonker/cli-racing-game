@@ -40,7 +40,7 @@ def pas_aan(ding, nieuw_level):
 
 def toevoegen_auto(naam):
     data = laad()
-    data["autos"][naam] = {"tune": 0, "damage": 0}
+    data["autos"][naam] = {"tune": 0, "schade": 0}
     json.dump(data, open("./data.json", "w"), indent=2)
 
 

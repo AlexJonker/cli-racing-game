@@ -28,13 +28,13 @@ def data_menu():
         menu_breedte = 35
         menu_data = [
             f"Naam : {data.laad()['naam']}",
-            f"geld: ${data.laad()["geld"]}",
+            f"Geld: ${data.laad()["geld"]}",
             f"Level: {data.laad()["level"]}",
             f"XP: {data.laad()["xp"]}",
             "",
             "-" * menu_breedte ,
             "",
-            f"geselecteerde auto: {geselecteerde_auto_naam}",
+            f"Geselecteerde auto: {geselecteerde_auto_naam}",
             f"Tune: {data.geselecteerde_auto("tune")}",
             f"Schade: {data.geselecteerde_auto("schade")}/100",
             "",

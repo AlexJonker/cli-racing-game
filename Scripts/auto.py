@@ -18,8 +18,8 @@ def race():
     xp = spelerdata["xp"]
 
     keuze = scherm.vraag([
-        f"damage: {schade}, tune: {tune}, money: ${geld}, level: {level}, xp: {xp}",
-        "What do you want to do?"],
+        f"Schade: {schade}, tune: {tune}, geld: ${geld}, level: {level}, xp: {xp}",
+        "Wat wil je doen??"],
         [
             "Optie 1",
             "Optie 2"
@@ -30,12 +30,12 @@ def race():
 
 
 def garage():
-    keuze = scherm.vraag(["Welcome to the garage!", "What do you want to do?"], ["Tune auto", "Repair", "Buy new auto", "Back"])
+    keuze = scherm.vraag(["Welkom in de garage!", "Wat wil je doen?"], ["Auto tunen", "Auto repareren", "Nieuwe auto kopen", "Terug"])
 
     if keuze == 0:
         tune = data.geselecteerde_auto("tune")
         prijs = 100 + (tune * 50)
-        keuze = scherm.vraag([f"Current tune level is: {tune}", f"Do you want to upgrade for ${prijs}?"], ["Yes", "No"])
+        keuze = scherm.vraag([f"Tune level is: {tune}", f"Wil je upgraden voor €{prijs}?"], ["Ja", "Nee"])
 
         if keuze == 0:
             geld = data.laad()["geld"]
@@ -56,11 +56,11 @@ def garage():
 
         if schade == 0:
             scherm.clear()
-            scherm.tekst("No damage to repair!")
+            scherm.tekst("Geen scahde!")
             sleep(2)
 
         else:
-            keuze = scherm.vraag([f"Current damage level is: {schade}/100", f"Do you want to repair for ${prijs}?"], ["Yes", "No"])
+            keuze = scherm.vraag([f"Je schade level is: {schade}/100", f"Wil je repareren voor ${prijs}?"], ["Ja", "Nee"])
 
             if keuze == 0:
                 geld = data.laad()["geld"]
@@ -77,7 +77,7 @@ def garage():
     elif keuze == 2:
         scherm.clear()
         auto_keuze = scherm.vraag(
-            ["Please choose the auto you want to buy:"],
+            ["Welke auto wil je kopen?:"],
             [f"{auto['jaar']} {auto['merk']} {auto['naam']} ({auto['pk']} HP)" for auto in autos]
         )
 

@@ -22,6 +22,7 @@ def main():
                 "Race",
                 "garage",
                 "Danger zone",
+                "Selecteer auto",
                 "Exit"
             ]
         )
@@ -47,6 +48,11 @@ def main():
                     main()
 
         elif keuze == 3:
+            keuze = scherm.vraag(["Welkom in de auto selectie!"], [f"{selectie}" for selectie in data.laad()["autos"]])
+            data.toevoegen("geselecteerde_auto", keuze)
+            scherm.tekst(f"{autos[keuze]['naam']} is geselecteerd!")
+
+        elif keuze == 4:
             scherm.curses.curs_set(1)
             exit()
 

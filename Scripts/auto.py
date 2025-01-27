@@ -76,12 +76,24 @@ def garage():
 
     elif keuze == 2:
         scherm.clear()
+        spelerdata = data.laad()
+        bezitte_auto_namen = spelerdata["autos"].keys()
+        beschikbare_autos = [auto for auto in autos if auto["naam"] not in bezitte_auto_namen]
+        auto_opties = [f"{auto['jaar']} {auto['merk']} {auto['naam']} ({auto['pk']} HP)" for auto in beschikbare_autos]
+        auto_opties.append("Exit")
+
         auto_keuze = scherm.vraag(
             ["Welke auto wil je kopen?:"],
-            [f"{auto['jaar']} {auto['merk']} {auto['naam']} ({auto['pk']} HP)" for auto in autos]
+            auto_opties
         )
 
-        data.toevoegen_auto(autos[auto_keuze]["naam"])
-    sleep(1)
-
-    return
+        if auto_keuze != len(auto_opties) - 1:
+            prijs = beschikbare_autos[auto_keuze]["prijs"]
+            geld = data.laad()["geld"]
+            if geld >= prijs:
+                data.toevoegen_auto(beschikbare_autos[auto_keuze]["naam"])
+                data.toevoegen("geld", geld - prijs)
+            else:
+                scherm.clear()
+                scherm.tekst("Broke boi")
+                sleep(1)

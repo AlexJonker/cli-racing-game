@@ -1,5 +1,6 @@
 from time import *
 import json
+import random
 
 import Scripts.data as data
 import Scripts.scherm as scherm
@@ -59,6 +60,11 @@ def race():
 
     scherm.clear()
     scherm.tekst(f"Je winkans is {winkans}%")
+
+    winst = (random.random()) * 100 < winkans
+
+    
+
 
     sleep(4)
 

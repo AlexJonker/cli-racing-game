@@ -54,19 +54,29 @@ def race():
     scherm.clear()
     scherm.tekst(f"Je hebt €{inzet_geld} ingezet.")
 
+    sleep(2)
+
     snelheid = scherm.vraag(["Hoe snel wil je gaan?"], ["Snel", "Normaal", "Traag"])
 
     winkans = (100 - schade) * ((1 + tune) * 2) * (3 - snelheid) / (level * 10)
 
     scherm.clear()
-    scherm.tekst(f"Je winkans is {winkans}%")
 
-    winst = (random.random()) * 100 < winkans
+    winst = random.random() * 100
 
-    
+    if winst < winkans:
+        gewonnen_geld = inzet_geld * 2
+        data.toevoegen("geld", data.laad()["geld"] + gewonnen_geld)
+        data.toevoegen("level", level + 1)
+        scherm.tekst(f"Gewonnen! Je hebt nu €{data.laad()["geld"]}.")
+
+    else:
+        data.toevoegen("geld", data.laad()["geld"] - inzet_geld)
+        scherm.tekst(f"Oei, je hebt verloren! Je hebt nu €{data.laad()["geld"]}.")
+
+    sleep(2)
 
 
-    sleep(4)
 
 
 

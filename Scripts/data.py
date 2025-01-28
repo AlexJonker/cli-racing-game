@@ -88,5 +88,4 @@ def nieuwe_speler():
     toevoegen("geselecteerde_auto", auto_choice)
     toevoegen("geld", 200)
     toevoegen("level", 1)
-    toevoegen("xp", 0)
     sleep(2)

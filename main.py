@@ -14,11 +14,11 @@ def main():
         if data.laad() == {}:
             data.nieuwe_speler()
         keuze = scherm.vraag(
-            [ # text
+            [ # tekst
                 "Welkom!",
                 "Wat wil je doen?"
             ],
-            [ # options
+            [ # opties
                 "Race",
                 "garage",
                 "Danger zone",

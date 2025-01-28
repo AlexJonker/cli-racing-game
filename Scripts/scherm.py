@@ -28,9 +28,8 @@ def data_menu():
         menu_breedte = 45
         menu_data = [
             f"Naam : {data.laad()['naam']}",
-            f"Geld: ${data.laad()["geld"]}",
+            f"Geld: €{data.laad()["geld"]}",
             f"Level: {data.laad()["level"]}",
-            f"XP: {data.laad()["xp"]}",
             "",
             "-" * menu_breedte ,
             "",

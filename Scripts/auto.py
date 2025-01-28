@@ -15,18 +15,54 @@ def race():
     tune = spelerdata["autos"][auto_naam]["tune"]
     geld = spelerdata["geld"]
     level = spelerdata["level"]
-    xp = spelerdata["xp"]
-
-    keuze = scherm.vraag([
-        f"Schade: {schade}, tune: {tune}, geld: ${geld}, level: {level}, xp: {xp}",
-        "Wat wil je doen??"],
-        [
-            "Optie 1",
-            "Optie 2"
-        ])
 
 
-    return
+    stdscr = scherm.init_curs()
+    scherm.curses.curs_set(1)
+    scherm.curses.echo()
+    hoogte, breedte = stdscr.getmaxyx()
+    scherm.clear()
+    prompt = f"Hoeveel geld wil je inzetten? Je hebt €{geld}. "
+
+    inzet_geld = ""
+    y, _ = stdscr.getyx()
+    x = (breedte // 2) - (len(prompt) // 2)
+    while inzet_geld == "":
+        scherm.clear()
+        stdscr.addstr(y, x, prompt)
+        input_x = x + len(prompt)
+        stdscr.move(y, input_x)
+        stdscr.refresh()
+
+        try:
+            inzet_geld = int(stdscr.getstr().decode('utf-8'))
+            if inzet_geld > geld:
+                scherm.clear()
+                scherm.tekst("Je hebt niet genoeg geld.")
+                inzet_geld = ""
+                sleep(1)
+
+        except ValueError:
+            scherm.clear()
+            scherm.tekst("Voer een geldig getal in.")
+            inzet_geld = ""
+            sleep(1)
+
+    scherm.curses.noecho()
+    scherm.curses.curs_set(0)
+    scherm.clear()
+    scherm.tekst(f"Je hebt €{inzet_geld} ingezet.")
+
+    snelheid = scherm.vraag(["Hoe snel wil je gaan?"], ["Snel", "Normaal", "Traag"])
+
+    winkans = (100 - schade) * ((1 + tune) * 2) * (3 - snelheid) / (level * 10)
+
+    scherm.clear()
+    scherm.tekst(f"Je winkans is {winkans}%")
+
+    sleep(4)
+
+
 
 
 def garage():
@@ -60,7 +96,7 @@ def garage():
             sleep(2)
 
         else:
-            keuze = scherm.vraag([f"Je schade level is: {schade}/100", f"Wil je repareren voor ${prijs}?"], ["Ja", "Nee"])
+            keuze = scherm.vraag([f"Je schade level is: {schade}/100", f"Wil je repareren voor €{prijs}?"], ["Ja", "Nee"])
 
             if keuze == 0:
                 geld = data.laad()["geld"]

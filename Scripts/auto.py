@@ -133,7 +133,7 @@ def garage():
         spelerdata = data.laad()
         bezitte_auto_namen = spelerdata["autos"].keys()
         beschikbare_autos = [auto for auto in autos if auto["naam"] not in bezitte_auto_namen]
-        auto_opties = [f"{auto['jaar']} {auto['merk']} {auto['naam']} ({auto['pk']} HP)" for auto in beschikbare_autos]
+        auto_opties = [f"{auto['pk']} PK {auto['jaar']} {auto['merk']} {auto['naam']} (€{auto['prijs']})" for auto in beschikbare_autos]
         auto_opties.append("Exit")
 
         auto_keuze = scherm.vraag(

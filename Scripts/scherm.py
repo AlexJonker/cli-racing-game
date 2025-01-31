@@ -2,7 +2,7 @@ import curses
 import Scripts.data as data
 import json
 
-autos = json.load(open("./autos.json", "r"))
+autos = json.load(open("./autos.json", "r")) # laad de auto's
 
 
 def init_curs():
@@ -14,11 +14,11 @@ def init_curs():
 
     return scr
 
-stdscr = init_curs()
+stdscr = init_curs() # start de curses
 
 
-def data_menu():
-    if data.laad() != {}:
+def data_menu(): # het mooie menu met alle data
+    if data.laad() != {}: # om error te voorkomen als er geen data is
         geselecteerde_auto_naam = f"{autos[data.laad()['geselecteerde_auto']]['jaar']} {autos[data.laad()['geselecteerde_auto']]['merk']} {autos[data.laad()['geselecteerde_auto']]['naam']}"
 
         auto_naam = []
@@ -52,12 +52,12 @@ def data_menu():
         menu_win.refresh()
 
 
-def clear():
+def clear(): # clear het scherm
     stdscr.erase()
     stdscr.refresh()
-    data_menu() # het menu met speler data
+    data_menu() # het menu met speler data zodat het altijd terug komt wanneer je scherm veranderd
 
-def tekst(text):
+def tekst(text): # zet tekst op het scherm
     hoogte, breedte = stdscr.getmaxyx()
     y, _ = stdscr.getyx()
     x = (breedte // 2) - (len(text) // 2)
@@ -65,7 +65,7 @@ def tekst(text):
     stdscr.refresh()
 
 
-def vraag(text_array, options):
+def vraag(text_array, options): # vraag voor imput met de pijltjes toetsen
     def main(curs):
         selectie = 0
         count = len(options)

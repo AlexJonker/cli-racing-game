@@ -5,10 +5,11 @@ import random
 import Scripts.data as data
 import Scripts.scherm as scherm
 
-autos = json.load(open("./autos.json", "r"))
+autos = json.load(open("./autos.json", "r")) # laad de autos.json
 
 
 def race():
+    #dis volgens mij best duidelijk wat t doet
     spelerdata = data.laad()
     geselecteerde_auto = spelerdata["geselecteerde_auto"]
     auto_naam = autos[geselecteerde_auto]['naam']
@@ -22,16 +23,16 @@ def race():
 
 
     stdscr = scherm.init_curs()
-    scherm.curses.curs_set(1)
+    scherm.curses.curs_set(1) # zet de type ding aan
     scherm.curses.echo()
     hoogte, breedte = stdscr.getmaxyx()
     scherm.clear()
-    prompt = f"Hoeveel geld wil je inzetten? Je hebt €{geld}. "
+    prompt = f"Hoeveel geld wil je inzetten? Je hebt €{geld}. " # all in is de strat
 
     inzet_geld = ""
     y, _ = stdscr.getyx()
     x = (breedte // 2) - (len(prompt) // 2)
-    while inzet_geld == "":
+    while inzet_geld == "": # kan niet niks inzetten
         scherm.clear()
         stdscr.addstr(y, x, prompt)
         input_x = x + len(prompt)
@@ -53,7 +54,7 @@ def race():
             sleep(1)
 
     scherm.curses.noecho()
-    scherm.curses.curs_set(0)
+    scherm.curses.curs_set(0) # zet het type ding weer uit
     scherm.clear()
     scherm.tekst(f"Je hebt €{inzet_geld} ingezet.")
 
@@ -63,20 +64,20 @@ def race():
 
     winkans = (100 - schade) * ((1 + tune) * 2) * (3 - snelheid) / (level * 10) * (pk / 10) # winkans
     schade = (4 - snelheid) * 3
-    data.pas_aan("schade", data.geselecteerde_auto("schade") + schade)
+    data.pas_aan("schade", data.geselecteerde_auto("schade") + schade) # geef auto schade
 
     scherm.clear()
 
-    winst = random.random() * 100
+    winst = random.random() * 100 # random getal tussen 0 en 100
 
-    if winst < winkans:
-        gewonnen_geld = inzet_geld * 2
+    if winst < winkans: # check of je hebt gewonnen.
+        gewonnen_geld = inzet_geld * 2 # als je wint krijg je je geld x2
         data.toevoegen("geld", data.laad()["geld"] + gewonnen_geld)
         data.toevoegen("level", level + 1)
         scherm.tekst(f"Gewonnen! Je hebt nu €{data.laad()["geld"]}.")
 
     else:
-        data.toevoegen("geld", data.laad()["geld"] - inzet_geld)
+        data.toevoegen("geld", data.laad()["geld"] - inzet_geld) # als je verliest verlies je je ingezette geld
         scherm.tekst(f"Oei, je hebt verloren! Je hebt nu €{data.laad()["geld"]}.")
 
     sleep(2)
@@ -90,14 +91,14 @@ def garage():
     keuze = scherm.vraag(["Welkom in de garage!", "Wat wil je doen?"], ["Auto tunen", "Auto repareren", "Nieuwe auto kopen", "Terug"])
 
     if keuze == 0:
-        tune = data.geselecteerde_auto("tune")
+        tune = data.geselecteerde_auto("tune") # krijg het tune level
         prijs = 100 + (tune * 50)
         keuze = scherm.vraag([f"Tune level is: {tune}", f"Wil je upgraden voor €{prijs}?"], ["Ja", "Nee"])
 
         if keuze == 0:
             geld = data.laad()["geld"]
 
-            if geld >= prijs:
+            if geld >= prijs: # check of je genoeg geld heb
                 data.toevoegen("geld", geld -prijs)
                 data.pas_aan("tune", tune + 1)
 
@@ -109,14 +110,14 @@ def garage():
 
     elif keuze == 1:
         schade = data.geselecteerde_auto("schade")
-        prijs = schade * 15
+        prijs = schade * 15 # berken prijs
 
         if schade == 0:
             scherm.clear()
             scherm.tekst("Geen schade!")
             sleep(2)
 
-        else:
+        else: # als je schade hebt kan je repareren
             keuze = scherm.vraag([f"Je schade level is: {schade}/100", f"Wil je repareren voor €{prijs}?"], ["Ja", "Nee"])
 
             if keuze == 0:
@@ -131,7 +132,7 @@ def garage():
                     scherm.tekst("Broke boi")
                     sleep(1)
 
-    elif keuze == 2:
+    elif keuze == 2: # koop een nieuwe auto
         scherm.clear()
         spelerdata = data.laad()
         bezitte_auto_namen = spelerdata["autos"].keys()
@@ -144,11 +145,11 @@ def garage():
             auto_opties
         )
 
-        if auto_keuze != len(auto_opties) - 1:
+        if auto_keuze != len(auto_opties) - 1: # als je niet exit kiest
             prijs = beschikbare_autos[auto_keuze]["prijs"]
             geld = data.laad()["geld"]
             if geld >= prijs:
-                data.toevoegen_auto(beschikbare_autos[auto_keuze]["naam"])
+                data.toevoegen_auto(beschikbare_autos[auto_keuze]["naam"]) # voeg de auto toe aan je data.json
                 data.toevoegen("geld", geld - prijs)
             else:
                 scherm.clear()

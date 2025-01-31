@@ -4,10 +4,10 @@ import json
 
 import Scripts.scherm as scherm
 
-autos = json.load(open("./autos.json", "r"))
+autos = json.load(open("./autos.json", "r")) # import de autos.json
 
 
-def laad():
+def laad(): # return de data.json
     if not os.path.exists("./data.json"):
         json.dump({}, open("./data.json", "w"))
 
@@ -16,13 +16,13 @@ def laad():
     return data
 
 
-def toevoegen(naam, value):
+def toevoegen(naam, value): # voeg data toe an data.json
     table = laad()
     table[naam] = value
     json.dump(table, open("./data.json", "w"), indent=2)
 
 
-def geselecteerde_auto(item):
+def geselecteerde_auto(item): # return de geselecteerde auto's item
     data = laad()
     geselecteerd = data['geselecteerde_auto']
     auto_naam = autos[geselecteerd]['naam']
@@ -30,7 +30,7 @@ def geselecteerde_auto(item):
     return data["autos"][auto_naam][item]
 
 
-def pas_aan(ding, nieuw_level):
+def pas_aan(ding, nieuw_level): # tune auto of repareer schade
     data = laad()  # Load the current data
     geselecteerd = data['geselecteerde_auto']
     auto_naam = autos[geselecteerd]['naam']
@@ -38,18 +38,18 @@ def pas_aan(ding, nieuw_level):
     json.dump(data, open("./data.json", "w"), indent=2)
 
 
-def toevoegen_auto(naam):
+def toevoegen_auto(naam): # voeg een auto toe aan je data.json
     data = laad()
     data["autos"][naam] = {"tune": 0, "schade": 0}
     json.dump(data, open("./data.json", "w"), indent=2)
 
 
-def nieuwe_speler():
+def nieuwe_speler(): # nieuwe speler vragen en data.json maken
     stdscr = scherm.init_curs()
     scherm.clear()
     scherm.tekst("Welkom! Dit is je eerste keer hier.")
-    scherm.curses.curs_set(1)
-    scherm.curses.echo()
+    scherm.curses.curs_set(1) # zet type ding aan
+    scherm.curses.echo() # zodat je kan zien wat je typt
     hoogte, breedte = stdscr.getmaxyx()
     prompt = "Wat is jouw naam? "
 
@@ -63,8 +63,8 @@ def nieuwe_speler():
         stdscr.refresh()
         speler_naam = stdscr.getstr().decode('utf-8')
 
-    scherm.curses.noecho()
-    scherm.curses.curs_set(0)
+    scherm.curses.noecho() # kan ni meer zien wat je typt
+    scherm.curses.curs_set(0) # zet type ding uit
 
     scherm.clear()
     scherm.tekst(f"Leuk je te ontmoeten, {speler_naam}!")

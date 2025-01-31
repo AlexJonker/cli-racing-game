@@ -38,5 +38,13 @@
     "pk": 108,
     "starter": false,
     "prijs": 9000
+  },
+  {
+    "naam": "BrentMobile",
+    "merk": "Mannes",
+    "jaar": 2008,
+    "pk": 500,
+    "starter": false,
+    "prijs": 2500000
   }
 ]

@@ -16,6 +16,9 @@ def race():
     tune = spelerdata["autos"][auto_naam]["tune"]
     geld = spelerdata["geld"]
     level = spelerdata["level"]
+    for auto in autos:
+        if auto["naam"] == auto_naam:
+            pk = auto["pk"]
 
 
     stdscr = scherm.init_curs()
@@ -58,7 +61,7 @@ def race():
 
     snelheid = scherm.vraag(["Hoe snel wil je gaan?", "Hoe sneller je gaat hoe meer kans om te winnen maar ook meer schade."], ["Snel", "Normaal", "Traag"])
 
-    winkans = (100 - schade) * ((1 + tune) * 2) * (3 - snelheid) / (level * 10)
+    winkans = (100 - schade) * ((1 + tune) * 2) * (3 - snelheid) / (level * 10) * (pk / 100)
     schade = (4 - snelheid) * 3
     data.pas_aan("schade", data.geselecteerde_auto("schade") + schade)
 

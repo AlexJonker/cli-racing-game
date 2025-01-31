@@ -74,6 +74,7 @@ def race():
         gewonnen_geld = inzet_geld * 2 # als je wint krijg je je geld x2
         data.toevoegen("geld", data.laad()["geld"] + gewonnen_geld)
         data.toevoegen("level", level + 1)
+        data.toevoegen("gewonnen_races", data.laad()["gewonnen_races"] + 1)
         scherm.tekst(f"Gewonnen! Je hebt nu €{data.laad()["geld"]}.")
 
     else:

@@ -88,4 +88,5 @@ def nieuwe_speler(): # nieuwe speler vragen en data.json maken
     toevoegen("geselecteerde_auto", auto_choice)
     toevoegen("geld", 200)
     toevoegen("level", 1)
+    toevoegen("gewonnen_races", 0)
     sleep(2)

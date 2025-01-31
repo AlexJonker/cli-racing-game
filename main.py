@@ -31,6 +31,21 @@ def main():
         if data.laad() == {}:
             data.nieuwe_speler() # start nieuwe speler
 
+        if data.laad()["gewonnen_races"] == 15:
+            keuze = scherm.vraag(["Gefeliciteerd, je hebt gewonnen.", "Wil je opnieuw beginnen?"], ["Ja", "Nee"])
+            if keuze == 0:
+                os.remove("data.json")
+                scherm.clear()
+                scherm.tekst("Alle data is verwijderd!")
+                sleep(2)
+                main() # terug naar main
+            else:
+                scherm.clear()
+                scherm.tekst("Sure, Dan niet")
+                sleep(2)
+                scherm.curses.curs_set(1) # zet het type ding weer aan
+                exit()
+
         if data.laad()["geld"] == 0:
             game_over() # game over
 

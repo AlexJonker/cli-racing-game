@@ -8,6 +8,21 @@ import Scripts.auto as auto
 
 autos = json.load(open("./autos.json", "r"))
 
+def game_over():
+    keuze = scherm.vraag(["Helaas, je hebt verloren.", "Wil je opnieuw beginnen?"], ["Ja", "Nee"])
+    if keuze == 0:
+        os.remove("data.json")
+        scherm.clear()
+        scherm.tekst("Alle data is verwijderd!")
+        sleep(2)
+        main()
+    else:
+        scherm.clear()
+        scherm.tekst("Sure, Dan niet")
+        sleep(2)
+        scherm.curses.curs_set(1)
+        exit()
+
 
 def main():
     try:
@@ -15,19 +30,19 @@ def main():
             data.nieuwe_speler()
 
         if data.laad()["geld"] == 0:
-            keuze = scherm.vraag(["Helaas, je hebt verloren.", "Wil je opnieuw beginnen?"], ["Ja", "Nee"])
-            if keuze == 0:
-                os.remove("data.json")
-                scherm.clear()
-                scherm.tekst("Alle data is verwijderd!")
-                sleep(2)
-                main()
-            else:
-                scherm.clear()
-                scherm.tekst("Sure, Dan niet")
-                sleep(2)
+            game_over()
 
         else:
+
+            for naam, vrum in data.laad()["autos"].items():
+                if vrum["schade"] >= 100:
+                    scherm.clear()
+                    scherm.tekst(f"Je {naam} is total loss! Deze ben je nu kwijt.")
+                    if data.laad()["autos"].length() == 1:
+                        scherm.tekst("Je hebt geen auto's meer!")
+                        sleep(2)
+                        game_over()
+
             keuze = scherm.vraag(
                 [ # tekst
                     "Welkom!",

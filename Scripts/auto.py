@@ -56,7 +56,7 @@ def race():
 
     sleep(2)
 
-    snelheid = scherm.vraag(["Hoe snel wil je gaan?"], ["Snel", "Normaal", "Traag"])
+    snelheid = scherm.vraag(["Hoe snel wil je gaan?", "Hoe sneller je gaat hoe meer kans om te winnen maar ook meer schade."], ["Snel", "Normaal", "Traag"])
 
     winkans = (100 - schade) * ((1 + tune) * 2) * (3 - snelheid) / (level * 10)
     schade = (4 - snelheid) * 3

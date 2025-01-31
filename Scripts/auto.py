@@ -59,6 +59,8 @@ def race():
     snelheid = scherm.vraag(["Hoe snel wil je gaan?"], ["Snel", "Normaal", "Traag"])
 
     winkans = (100 - schade) * ((1 + tune) * 2) * (3 - snelheid) / (level * 10)
+    schade = (4 - snelheid) * 3
+    data.pas_aan("schade", data.geselecteerde_auto("schade") + schade)
 
     scherm.clear()
 
